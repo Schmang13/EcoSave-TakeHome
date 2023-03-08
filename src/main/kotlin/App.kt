@@ -31,11 +31,16 @@ suspend fun fetchVideos(): List<Video> = coroutineScope {
 
 val App = FC<Props> {
     var currentVideo: Video? by useState(null)
-    var currentAudio: Audio? by useState(null)
+    var currentListen: String? by useState(null)
     var unwatchedVideos: List<Video> by useState(emptyList())
     var watchedVideos: List<Video> by useState(emptyList())
-    var notListened: List<Audio> by useState(emptyList())
-    var listened: List<Audio> by useState(emptyList())
+    var listened: List<String> by useState(emptyList())
+    var notListened: List<String> by useState(listOf(
+        "https://file-examples.com/storage/fe0b804ac5640668798b8d0/2017/11/file_example_MP3_700KB.mp3",
+        "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3",
+        "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_2MG.mp3",
+        "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3"
+    ))
 
     useEffectOnce {
         mainScope.launch {
@@ -73,6 +78,7 @@ val App = FC<Props> {
             css {
                 display = Display.flex
                 flexDirection = FlexDirection.row
+                justifyContent = JustifyContent.spaceBetween
             }
             div {
                 h3 {
@@ -83,7 +89,6 @@ val App = FC<Props> {
                     selectedVideo = currentVideo
                     onSelectVideo = { video ->
                         currentVideo = video
-                        currentAudio = video
                     }
                 }
             }
@@ -96,15 +101,24 @@ val App = FC<Props> {
                     selectedVideo = currentVideo
                     onSelectVideo = { video ->
                         currentVideo = video
-                        currentAudio = video
                     }
                 }
             }
         }
         div {
-            currentAudio?.let { curr ->
+            currentListen?.let { curr ->
                 AudioPlayer {
                     src = curr
+                    notListenedTo = curr in notListened
+                    onWatchedButtonPressed = {
+                        if (curr in notListened) {
+                            notListened = notListened - curr
+                            listened = listened + curr
+                        } else {
+                            listened = listened - curr
+                            notListened = notListened + curr
+                        }
+                    }
                 }
             }
         }
@@ -112,30 +126,31 @@ val App = FC<Props> {
             css {
                 display = Display.flex
                 flexDirection = FlexDirection.row
+                justifyContent = JustifyContent.spaceAround
             }
             div {
                 h3 {
-                    +"Audio to listen"
+                    +"Audio to listen to"
                 }
-//                AudioList {
-//                    audios = notListened
-//                    selectedAudio = currentAudio
-//                    onSelectAudio = { audio ->
-//                        currentAudio = audio
-//                    }
-//                }
+                AudioList {
+                    audios = notListened
+                    selectedAudio = currentListen
+                    onSelectAudio = { audio ->
+                        currentListen = audio
+                    }
+                }
             }
             div {
                 h3 {
                     +"Audio listened to"
                 }
-//                AudioList {
-//                    audios = listened
-//                    selectedAudio = currentVideo
-//                    onSelectAudio = { audio ->
-//                        currentAudio = audio
-//                    }
-//                }
+                AudioList {
+                    audios = listened
+                    selectedAudio = currentListen
+                    onSelectAudio = { audio ->
+                        currentListen = audio
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,8 @@
 import react.*
 import react.dom.html.ReactHTML.p
+import csstype.*
+import emotion.react.css
+
 
 external interface VideoListProps : Props {
     var videos: List<Video>
@@ -10,6 +13,11 @@ external interface VideoListProps : Props {
 val VideoList = FC<VideoListProps> {props ->
     for (video in props.videos) {
         p {
+            css {
+                hover {
+                    color = NamedColor.gray
+                }
+            }
             key = video.id.toString()
             onClick = {
                 props.onSelectVideo(video)

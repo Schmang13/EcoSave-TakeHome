@@ -8,4 +8,6 @@ external val ReactAudioPlayer: ComponentClass<ReactAudioPlayerProps>
 
 external interface ReactAudioPlayerProps : Props {
     var src: String
+    var autoPlay: Boolean
+    var controls: Boolean
 }

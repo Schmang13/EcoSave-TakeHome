@@ -10,8 +10,9 @@ data class Video(
     val speaker: String,
     val videoUrl: String
 )
-
+@Serializable
 data class Audio(
+    val id: Int,
     val src: String
 )
 

@@ -16,33 +16,39 @@ val VideoPlayer = FC<VideoPlayerProps> { props ->
         h3 {
             +"${props.video.speaker}: ${props.video.title}"
         }
-        button {
-            css {
-                display = Display.block
-                backgroundColor = if (props.unwatchedVideo) NamedColor.lightgreen else NamedColor.red
-            }
-            onClick = {
-                props.onWatchedButtonPressed(props.video)
-            }
-            if (props.unwatchedVideo) {
-                +"Mark as watched"
-            } else {
-                +"Mark as unwatched"
-            }
-        }
         div {
-            EmailShareButton {
-                url = props.video.videoUrl
-                EmailIcon {
-                    size = 32
-                    round = true
+            css {
+                display = Display.flex
+                justifyContent = JustifyContent.spaceBetween
+            }
+            button {
+                css {
+                    display = Display.block
+                    backgroundColor = if (props.unwatchedVideo) NamedColor.lightgreen else NamedColor.red
+                }
+                onClick = {
+                    props.onWatchedButtonPressed(props.video)
+                }
+                if (props.unwatchedVideo) {
+                    +"Mark as watched"
+                } else {
+                    +"Mark as unwatched"
                 }
             }
-            TelegramShareButton {
-                url = props.video.videoUrl
-                TelegramIcon {
-                    size = 32
-                    round = true
+            div {
+                EmailShareButton {
+                    url = props.video.videoUrl
+                    EmailIcon {
+                        size = 32
+                        round = true
+                    }
+                }
+                TelegramShareButton {
+                    url = props.video.videoUrl
+                    TelegramIcon {
+                        size = 32
+                        round = true
+                    }
                 }
             }
         }
