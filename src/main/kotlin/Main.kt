@@ -10,6 +10,12 @@ data class Video(
     val speaker: String,
     val videoUrl: String
 )
+@Serializable
+data class Audio(
+    val src: String,
+    val title: String
+)
+
 
 fun main() {
     val container = document.getElementById("root") ?: error("Couldn't find root container!")

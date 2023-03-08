@@ -13,47 +13,34 @@ external interface VideoPlayerProps : Props {
 
 val VideoPlayer = FC<VideoPlayerProps> { props ->
     div {
-        css {
-            position = Position.absolute
-            top = 10.px
-            right = 10.px
-        }
         h3 {
             +"${props.video.speaker}: ${props.video.title}"
         }
-        button {
-            css {
-                display = Display.block
-                backgroundColor = if (props.unwatchedVideo) NamedColor.lightgreen else NamedColor.red
-            }
-            onClick = {
-                props.onWatchedButtonPressed(props.video)
-            }
-            if (props.unwatchedVideo) {
-                +"Mark as watched"
-            } else {
-                +"Mark as unwatched"
-            }
-        }
         div {
             css {
-                position = Position.absolute
-                top = 10.px
-                right = 10.px
+                display = Display.flex
+                justifyContent = JustifyContent.spaceBetween
+                marginBottom = 10.px
             }
-            EmailShareButton {
-                url = props.video.videoUrl
-                EmailIcon {
-                    size = 32
-                    round = true
+            button {
+                css {
+                    display = Display.block
+                    backgroundColor = if (props.unwatchedVideo) NamedColor.lightgreen else NamedColor.red
+                    paddingLeft = 10.px
+                    paddingRight = 10.px
+                    borderRadius = 10.px
+                }
+                onClick = {
+                    props.onWatchedButtonPressed(props.video)
+                }
+                if (props.unwatchedVideo) {
+                    +"Mark as watched"
+                } else {
+                    +"Mark as unwatched"
                 }
             }
-            TelegramShareButton {
+            Sharing{
                 url = props.video.videoUrl
-                TelegramIcon {
-                    size = 32
-                    round = true
-                }
             }
         }
         ReactPlayer {
