@@ -33,6 +33,9 @@ dependencies {
     //Video Player (chapter 7)
     implementation(npm("react-player", "2.10.1"))
 
+    //Audio Player
+    implementation(npm("react-audio-player", "0.17.0"))
+
     //Share Buttons (chapter 7)
     implementation(npm("react-share", "4.4.0"))
 

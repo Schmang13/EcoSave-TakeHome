@@ -13,11 +13,6 @@ external interface VideoPlayerProps : Props {
 
 val VideoPlayer = FC<VideoPlayerProps> { props ->
     div {
-        css {
-            position = Position.absolute
-            top = 10.px
-            right = 10.px
-        }
         h3 {
             +"${props.video.speaker}: ${props.video.title}"
         }
@@ -36,11 +31,6 @@ val VideoPlayer = FC<VideoPlayerProps> { props ->
             }
         }
         div {
-            css {
-                position = Position.absolute
-                top = 10.px
-                right = 10.px
-            }
             EmailShareButton {
                 url = props.video.videoUrl
                 EmailIcon {

@@ -11,6 +11,11 @@ data class Video(
     val videoUrl: String
 )
 
+data class Audio(
+    val src: String
+)
+
+
 fun main() {
     val container = document.getElementById("root") ?: error("Couldn't find root container!")
     createRoot(container).render(App.create())
