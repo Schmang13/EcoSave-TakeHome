@@ -12,8 +12,8 @@ data class Video(
 )
 @Serializable
 data class Audio(
-    val id: Int,
-    val src: String
+    val src: String,
+    val title: String
 )
 
 

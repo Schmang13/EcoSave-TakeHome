@@ -6,7 +6,7 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h3
 
 external interface AudioPlayerProps : Props {
-    var src: String
+    var audio: Audio
     var onWatchedButtonPressed: (String) -> Unit
     var notListenedTo: Boolean
 }
@@ -14,47 +14,39 @@ external interface AudioPlayerProps : Props {
 val AudioPlayer = FC<AudioPlayerProps> { props ->
     div {
         h3 {
-            +"Audio Clips"
+
+            +props.audio.title
         }
         div {
             css {
                 display = Display.flex
                 justifyContent = JustifyContent.spaceBetween
+                marginBottom = 10.px
             }
             button {
                 css {
                     display = Display.block
                     backgroundColor = if (props.notListenedTo) NamedColor.lightgreen else NamedColor.red
+                    paddingLeft = 10.px
+                    paddingRight = 10.px
+                    borderRadius = 10.px
                 }
                 onClick = {
-                    props.onWatchedButtonPressed(props.src)
+                    props.onWatchedButtonPressed(props.audio.src)
                 }
                 if (props.notListenedTo) {
-                    +"Mark as watched"
+                    +"Mark as listened"
                 } else {
-                    +"Mark as unwatched"
+                    +"Mark as to listen"
                 }
             }
-            div {
-                EmailShareButton {
-                    url = props.src
-                    EmailIcon {
-                        size = 32
-                        round = true
-                    }
-                }
-                TelegramShareButton {
-                    url = props.src
-                    TelegramIcon {
-                        size = 32
-                        round = true
-                    }
-                }
+            Sharing{
+                url = props.audio.src
             }
         }
         ReactAudioPlayer {
-            src = props.src
-            autoPlay = true
+            src = props.audio.src
+            autoPlay = false
             controls = true
         }
     }

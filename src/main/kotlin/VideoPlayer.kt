@@ -20,11 +20,15 @@ val VideoPlayer = FC<VideoPlayerProps> { props ->
             css {
                 display = Display.flex
                 justifyContent = JustifyContent.spaceBetween
+                marginBottom = 10.px
             }
             button {
                 css {
                     display = Display.block
                     backgroundColor = if (props.unwatchedVideo) NamedColor.lightgreen else NamedColor.red
+                    paddingLeft = 10.px
+                    paddingRight = 10.px
+                    borderRadius = 10.px
                 }
                 onClick = {
                     props.onWatchedButtonPressed(props.video)
@@ -35,21 +39,8 @@ val VideoPlayer = FC<VideoPlayerProps> { props ->
                     +"Mark as unwatched"
                 }
             }
-            div {
-                EmailShareButton {
-                    url = props.video.videoUrl
-                    EmailIcon {
-                        size = 32
-                        round = true
-                    }
-                }
-                TelegramShareButton {
-                    url = props.video.videoUrl
-                    TelegramIcon {
-                        size = 32
-                        round = true
-                    }
-                }
+            Sharing{
+                url = props.video.videoUrl
             }
         }
         ReactPlayer {

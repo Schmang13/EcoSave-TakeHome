@@ -5,15 +5,16 @@ import emotion.react.css
 
 
 external interface AudioListProps : Props {
-    var audios: List<String>
-    var selectedAudio: String?
-    var onSelectAudio: (String) -> Unit
+    var audios: List<Audio>
+    var selectedAudio: Audio?
+    var onSelectAudio: (Audio) -> Unit
 }
 
 val AudioList = FC<AudioListProps> { props ->
     for (audio in props.audios) {
         p {
             css {
+                width = 250.px
                 hover {
                     color = NamedColor.gray
                 }
@@ -24,7 +25,7 @@ val AudioList = FC<AudioListProps> { props ->
             if (audio == props.selectedAudio) {
                 +"▶ "
             }
-            + audio
+            + audio.title
         }
     }
 }
