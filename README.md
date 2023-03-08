@@ -1,8 +1,15 @@
-[![official JetBrains project](https://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
+# EcoSave Take Home
 
-# Building Web Applications with React and Kotlin JS Hands-On Lab
+### Instructions:
+1. Clone repo to local machine
+2. Enter the following command into the Terminal:
+ ```
+./gradlew run
+```
+3. Now navigate to the opened browser window and you are ready to go!
 
-This repository is the code corresponding to the hands-on lab Building Web Applications with React and Kotlin JS.
 
-**You can find the code of the lab after each step outlined in the tutorial in the corresponding branch.**
+If you want to run in developer mode, then run this command instead (this enables hot reload):
+```
+./gradlew run --continuous
+```
